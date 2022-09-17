@@ -109,26 +109,40 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  if (items.isEmpty) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  final item = items[index];
-                  return ListTile(
-                    title: Text(item['full_name']),
-                    subtitle: Text(item['description'] ?? ''),
-                    leading: Image.network(item['owner']['avatar_url'] ?? ''),
-                  );
-                },
-              ),
-            ),
+            _ListTileWidget(items: items),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ListTileWidget extends StatelessWidget {
+  const _ListTileWidget({
+    Key? key,
+    required this.items,
+  }) : super(key: key);
+
+  final List items;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          if (items.isEmpty) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          final item = items[index];
+          return ListTile(
+            title: Text(item['full_name']),
+            subtitle: Text(item['description'] ?? ''),
+            leading: Image.network(item['owner']['avatar_url'] ?? ''),
+          );
+        },
       ),
     );
   }
