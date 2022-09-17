@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       searchUri = '$baseUrl$path?q=$keyword';
     }
 
-    print('searchUri: $searchUri');
+    debugPrint('searchUri: $searchUri');
 
     try {
       final response = await http.get(Uri.parse(searchUri));
@@ -60,8 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
         });
       }
     } on Exception catch (e) {
-      print(e);
-      print(searchUri);
+      debugPrint(e.toString());
+      debugPrint(searchUri);
     }
   }
 
